@@ -1,0 +1,136 @@
+<section class="animate__animated animate__fadeIn mt-5">
+
+  <app-title [title]="accion"></app-title>
+
+  <form [formGroup]="formLogin" (ngSubmit)="saveStudent()">
+    <div class="space-y-12">
+      <div class="border-b border-gray-900/10 pb-12">
+
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+          <div class="sm:col-span-3">
+            <label class="text-sm/6 font-medium text-gray-900">Nombre</label>
+            <div class="mt-2">
+              <input type="text" formControlName="name" placeholder="Nombre" autocomplete="given-name"
+                class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+              @for( validation of errors.Requerido; track $index){
+              <div class="ml-2 font text-sm text-red-600">
+                @if(formLogin.get('name').hasError(validation.type) && (formLogin.get('name').dirty ||
+                formLogin.get('name').touched)){
+                <span>
+                  {{validation.message}}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Apellido</label>
+            <div class="mt-2">
+              <input type="text" formControlName="lastName" placeholder="Apellido" name="last-name" id="last-name"
+                autocomplete="family-name" class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+              @for( validation of errors.Requerido; track $index){
+              <div class="ml-2 font text-sm text-red-600">
+                @if(formLogin.get('lastName').hasError(validation.type) && (formLogin.get('lastName').dirty ||
+                formLogin.get('lastName').touched)){
+                <span
+                  *ngIf="formLogin.get('lastName').hasError(validation.type) && (formLogin.get('lastName').dirty || formLogin.get('lastName').touched)">
+                  {{validation.message}}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="sm:col-span-4">
+            <label for="first-name" class="block text-sm/6 font-medium text-gray-900">identificaión</label>
+            <div class="mt-2">
+              <input type="text" formControlName="identification" placeholder="Identidicación" autocomplete="given-name"
+                class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+              @for( validation of errors.nit; track $index){
+              <div class="ml-2 font text-sm text-red-600">
+                @if(formLogin.get('identification').hasError(validation.type) && (formLogin.get('identification').dirty
+                || formLogin.get('identification').touched)){
+                <span>
+                  {{validation.message}}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="email" class="block text-sm/6 font-medium text-gray-900">Dirección de correo electrónico</label>
+            <div class="mt-2">
+              <input formControlName="email" placeholder="Correo electrónico" type="email" autocomplete="email"
+                class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+              @for( validation of errors.email; track $index){
+              <div class="ml-2 font text-sm text-red-600">
+                @if(formLogin.get('email').hasError(validation.type) && (formLogin.get('email').dirty ||
+                formLogin.get('email').touched)){
+                <span>
+                  {{validation.message}}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="email" class="block text-sm/6 font-medium text-gray-900">Dirección de vivienda</label>
+            <div class="mt-2">
+              <input type="email" formControlName="address" placeholder="Dirección de vivienda" autocomplete="email"
+                class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+              @for( validation of errors.Requerido; track $index){
+              <div class="ml-2 font text-sm text-red-600">
+                @if(formLogin.get('address').hasError(validation.type) && (formLogin.get('address').dirty ||
+                formLogin.get('address').touched)){
+                <span>
+                  {{validation.message}}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+          <div class="col-span-full">
+            <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Pásgina WEB</label>
+            <div class="mt-2">
+              <input type="text" formControlName="pageWeb" placeholder="Página Web" autocomplete="street-address"
+                class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+              @for( validation of errors.Requerido; track $index){
+              <div class="ml-2 font text-sm text-red-600">
+                @if(formLogin.get('pageWeb').hasError(validation.type) && (formLogin.get('pageWeb').dirty ||
+                formLogin.get('pageWeb').touched)){
+                <span>
+                  {{validation.message}}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+      <button type="button" class="text-sm/6 font-semibold text-gray-900 hover:text-gray-500"
+        (click)="goBack()">Cancelar
+      </button>
+      <button type="submit"
+        class="rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white
+                             hover:bg-indigo-500  disabled:bg-gray-400 disabled:text-gray-700 disabled:cursor-not-allowed"
+        [disabled]="!formLogin.valid">
+        <i class="fas fa-database"></i> Guardar
+      </button>
+    </div>
+  </form>
+</section>

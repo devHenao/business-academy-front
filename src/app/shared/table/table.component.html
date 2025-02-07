@@ -1,0 +1,57 @@
+<section class="animate__animated animate__fadeIn">
+  @if(acciones && create){
+  <section class="flex pb-2 justify-end items-end">
+    <!-- <button class="flex border border-black-700 text-white hover:text-stone-300
+                  items-center justify-center pl-1 pb-1 bg-gray-700" [routerLink]="[popup]">
+      Agregar <i class="fa-solid fa-plus felx pl-1 pr-2 "></i>
+    </button> -->
+    <!-- Aquí pasamos null como argumento -->
+    <button (click)="openStudentPopup(null)" class="flex border border-black-700 text-white hover:text-stone-300
+              items-center justify-center pl-1 pb-1 bg-gray-700">
+      Agregar <i class="fa-solid fa-plus felx pl-1 pr-2 "></i>
+    </button>
+  </section>
+  }
+
+  @defer () {
+  <Section class=" flex justify-center items-center">
+    <table class="table-auto mx-auto text-left w-full bg-sky-300">
+      <thead class="border border-gray-900 p-2 items-center bg-sky-700">
+        <tr class="border border-gray-500 p-2">
+          @for (itemHeader of listTHeader; track $index) {
+          <th class="border border-gray-500 p-2">{{ itemHeader.label }}</th>
+          }
+          @if(acciones){
+          <th class="border border-gray-500 p-2">Acciones</th>
+          }
+        </tr>
+      </thead>
+      <tbody class="border border-gray-500 p-2">
+        @for (itemBody of listTBody; track $index) {
+        <tr class="border border-gray-500">
+          @for (itemHeader of listTHeader; track $index) {
+          <td class="border border-gray-500 p-2">{{ itemBody[itemHeader.key] }}</td>
+          }
+          @if(acciones){
+          <td class=" p-5  flex justify-center items-center space-x-4">
+            @if(update){
+            <button class="text-blue-700 hover:text-blue-950" (click)="openStudentPopup(itemBody)">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            }
+            @if(delete){
+            <button class="text-red-500 hover:text-red-700 " (click)="deleteGeneric(itemBody.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            }
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </Section>
+  }@placeholder {
+  <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">Cargando...</p>
+  }
+</section>

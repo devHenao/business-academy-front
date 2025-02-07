@@ -1,0 +1,19 @@
+.popup-overlay {
+  @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center;
+}
+
+.popup-content {
+  @apply  w-[70%] h-[90%] bg-sky-50 p-5 rounded-lg shadow-lg overflow-y-auto relative;
+}
+
+.close-button {
+  @apply absolute top-2.5 left-2.5 bg-none border-0 text-xl cursor-pointer text-gray-600;
+}
+
+.close-button:hover {
+  @apply text-black;
+}
+
+.close-button {
+  @apply left-[97%];
+}

@@ -1,0 +1,7 @@
+<app-title title="Estudaintes"></app-title>
+<section class="flex justify-center  ">
+  <div class=" p-4 w-full max-w-4xl">
+    <app-table  [listTBody]="student()" [listTHeader]="listTHeader" [acciones]="true" [update]="true"
+                [create]=" true" [delete]="true" [deleteAction]="deleteStudent.bind(this)" [popupServices]="popupService_" />
+  </div>
+</section>

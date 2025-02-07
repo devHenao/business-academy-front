@@ -1,0 +1,14 @@
+
+:root {
+  --primary-color: #6B46C1;  /* Purple */
+  --secondary-color: #F6E05E; /* Yellow */
+  --font-size-base: 16px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  @apply bg-sky-500/10;
+}

@@ -1,0 +1,27 @@
+{
+  "material-icon-theme.folders.customClones": [
+    {
+      "name": "domain-admin",
+      "base": "bower",
+      "color": "#795548",
+      "lightColor": "#6d4c41",
+      "folderNames": ["domain"],
+      "rootFolderNames": ["domain"]
+    },
+    {
+      "name": "gateway-admin",
+      "base": "resolver",
+      "color": "#ef5350",
+      "folderNames": ["gateway"],
+      "rootFolderNames": ["gateway"]
+    },
+    {
+      "name": "interceptors-admin",
+      "base": "temp",
+      "color": "#26a69a",
+      "lightColor": "#80cbc4",
+      "folderNames": ["interceptors"],
+      "rootFolderNames": ["interceptors"]
+    }
+  ]
+  }
