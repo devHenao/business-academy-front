@@ -10,6 +10,6 @@ export class ExcecuteTemplateUseCase {
   executeTemplateGateway_ = inject(ExecuteTemplateGateway);
 
   execute(student: IStudent[]): Observable<any[]> {
-    return this.executeTemplateGateway_.executeTemplate(student);
+    return this.executeTemplateGateway_.getAllStudents(student);
   }
 }
