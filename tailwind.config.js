@@ -4,8 +4,17 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
-  },
+    extend: {
+      fontSize: {
+        '30px': '30px',
+      },
+      colors: {
+        'black': '#000000',
+      },
+      fontFamily: {
+        'times': ['"Times New Roman"', 'Times', 'serif'],
+      }
+    },  },
   plugins: [],
 }
 
