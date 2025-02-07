@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TitleComponent } from '../../../shared/title/title.component';
 import { StudentService } from '../../../services/student.service';
-import { State } from '../../../core/domain/Interfaces/students.response.component';
+import { State } from '../../../../../core/domain/Interfaces/students.response.component';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from '../../../shared/table/table.component';
 import { Studentroutes } from '../../app.student.routes';

@@ -22,6 +22,22 @@
       "lightColor": "#80cbc4",
       "folderNames": ["interceptors"],
       "rootFolderNames": ["interceptors"]
+    },
+    {
+      "name": "use-case-admin",
+      "base": "pipe",
+      "color": "#90A4AE",
+      "lightColor": "#177044",
+      "folderNames": ["use-case"],
+      "rootFolderNames": ["use-case"]
+    },
+    {
+      "name": "infrastructure-admin",
+      "base": "jinja",
+      "color": "#90A4AE",
+      "lightColor": "#177044",
+      "folderNames": ["infrastructure"],
+      "rootFolderNames": ["infrastructure"]
     }
   ]
   }

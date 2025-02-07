@@ -10,7 +10,7 @@ import { TitleComponent } from '../../../shared/title/title.component';
 import {
   errorMessages,
   regExps,
-} from '../../../core/global/utilities/validations.service';
+} from '../../../../../core/global/utilities/validations.service';
 import { PopupService } from '../../../services/popup.service'; // <-- Importa el servicio
 import { StudentService } from '../../../services/student.service';
 

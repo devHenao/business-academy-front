@@ -1,6 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { errorMessages, regExps } from '../../../core/global/utilities/validations.service';
+import { errorMessages, regExps } from '../../../../../core/global/utilities/validations.service';
 import {
   FormBuilder,
   FormsModule,
