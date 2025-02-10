@@ -14,7 +14,6 @@ export class TableComponent {
   @Input({ required: true }) acciones: boolean = false;
   @Input({ required: true}) listTHeader: any[] = [];
   @Input({ required: true }) listTBody: any[] = [];
-  // @Input() popup: any;
   @Input() popupServices: any;
   @Input() deleteAction?: (id:number) => void;
   @Input() getData!: () => void;

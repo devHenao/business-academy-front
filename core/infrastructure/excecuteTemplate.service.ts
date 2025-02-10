@@ -12,31 +12,28 @@ export class excecuteTemplateService extends ExecuteTemplateGateway {
   private Http = inject(HttpClient);
   private url = environment.apiUrlprueba;
 
-  getAllStudents(student: IStudent[]): Observable<any[]> {
-    console.log('Sending data to API:', student);
-    return this.Http.get<any>(this.url)
+  getAllStudents(): Observable<any> {
+    return this.Http.get<any>(`${this.url}GetAllListStudents`)
     .pipe(catchError(this.handleError));
   }
 
   registerStudent(student: IStudent[]): Observable<any[]> {
     console.log('Sending data to API:', student);
-    return this.Http.post<any>('https://reqres.in/api/users', student).pipe(
+    return this.Http.post<any>(`${this.url}CreateStudent`, student).pipe(
       catchError(this.handleError)
     );
   }
 
   updateStudent(student: IStudent[]): Observable<any[]> {
     console.log('Sending data to API:', student);
-    // return this.Http.put<any>(`https://reqres.in/api/users/${id}`, student)
-    return this.Http.put<any>(`https://reqres.in/api/users`, student).pipe(
+    return this.Http.put<any>(`${this.url}UpdateStudent`, student).pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteStudent(student: IStudent[]): Observable<any[]> {
-    console.log('Sending data to API:', student);
-    // return this.Http.delete<any>(`https://reqres.in/api/users/${id}`)
-    return this.Http.delete<any>(`https://reqres.in/api/users`).pipe(
+  deleteStudent(id: any): Observable<any[]> {
+    return this.Http.delete<any>(`${this.url}DeleteStudentById/${id}`)
+    .pipe(
       catchError(this.handleError)
     );
   }

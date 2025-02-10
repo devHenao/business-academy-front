@@ -13,6 +13,7 @@ import {
 } from '../../../../../core/global/utilities/validations.service';
 import { PopupService } from '../../../services/popup.service';
 import { StudentService } from '../../../services/student.service';
+import { excecuteTemplateService } from '../../../../../core/infrastructure/excecuteTemplate.service';
 
 @Component({
   selector: 'app-student-popup',
@@ -41,15 +42,17 @@ export class StudentPopupComponent {
 
   private _popupService = inject(PopupService);
   private _studentService = inject(StudentService);
+  public excecuteTemplateService_ = inject(excecuteTemplateService);
 
   constructor(private _formBuilder: FormBuilder) {
     const student = this._popupService.getCurrentStudent();
     console.log('Datos del estudiante en el constructor:', student);
 
     this.formLogin = this._formBuilder.group({
-      document: [Number, Validators.compose([
+      document: [null, Validators.compose([
+                          Validators.required,
                           Validators.maxLength(30),
-                          Validators.pattern(regExps['nit'])]),],
+                          Validators.pattern(regExps['decimal1'])]),],
       firstName: ['', Validators.compose([
                 Validators.maxLength(30),
                 Validators.required]),],
@@ -105,7 +108,6 @@ export class StudentPopupComponent {
       document : this.formLogin.get('document')?.value,
       firstName : this.formLogin.get('firstName')?.value,
       lastName : this.formLogin.get('lastName')?.value,
-      // email : this.formLogin.get('email')?.value,
       attendant : this.formLogin.get('attendant')?.value,
       address : this.formLogin.get('address')?.value,
       district : this.formLogin.get('district')?.value,
@@ -117,14 +119,15 @@ export class StudentPopupComponent {
 
 
     if (this.id === undefined) {
-      this._studentService.registerStudent(student).subscribe(
+      this.excecuteTemplateService_.registerStudent(student).subscribe(
         (response: any) => {
           console.log('Estudiante guardado correctamente', response);
-          this.formLogin.reset();
-          this.close();
           if (this.getData) {
             this.getData();
           }
+          this.formLogin.reset();
+          this.close();
+
         },
         (error: any) => {
           console.error('Error al guardar el estudiante', error);
@@ -132,16 +135,16 @@ export class StudentPopupComponent {
       );
     } else {
       student.id = this.id;
-      this._studentService.updateStudent(student).subscribe(
+      this.excecuteTemplateService_.updateStudent(student).subscribe(
         () => {
           console.log('El estudiante fue actualizado correctamente');
+          if (this.getData) {
+            this.getData();
+          }
           this.formLogin.reset();
           this.accion = 'Agregar Estudiante';
           this.id = undefined;
           this.close();
-          if (this.getData) {
-            this.getData();
-          }
         },
         (err) => {
           console.log('Hubo un error al actualizar el estudiante', err);

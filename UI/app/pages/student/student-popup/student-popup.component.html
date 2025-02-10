@@ -72,9 +72,9 @@
               <div class="sm:col-span-3">
                 <label for="first-name" class="block text-sm/6 font-medium text-gray-900">identificaión</label>
                 <div class="mt-2">
-                  <input type="number" formControlName="document" placeholder="Identidicación" autocomplete="given-name"
+                  <input type="text" formControlName="document" placeholder="Identidicación" autocomplete="given-name"
                     class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
-                  @for( validation of errors.nit; track $index){
+                  @for( validation of errors.RequeridoNumber; track $index){
                   <div class="ml-2 font text-sm text-red-600">
                     @if(formLogin.get('document').hasError(validation.type) &&
                     (formLogin.get('document').dirty
@@ -87,6 +87,7 @@
                   }
                 </div>
               </div>
+
               <!--
                 <div class="sm:col-span-3">
                   <label for="email" class="block text-sm/6 font-medium text-gray-900">Dirección de correo
@@ -201,16 +202,16 @@
                 <label for="active" class="block text-sm/6 font-medium text-gray-900">Estado</label>
                 <div class="mt-2">
                   <input type="checkbox" formControlName="active"
-                         class="rounded-md focus:outline-indigo-600 sm:text-sm/6">
+                    class="rounded-md focus:outline-indigo-600 sm:text-sm/6">
                   <label for="active" class="ml-2 text-sm text-gray-600">Activo</label>
-                  <div *ngIf="formLogin.get('active')?.invalid && (formLogin.get('active')?.dirty || formLogin.get('active')?.touched)">
+                  <div
+                    *ngIf="formLogin.get('active')?.invalid && (formLogin.get('active')?.dirty || formLogin.get('active')?.touched)">
                     <div class="ml-2 text-sm text-red-600">
                       {{ errors.Requerido?.message }}
                     </div>
                   </div>
                 </div>
               </div>
-
 
             </div>
           </div>

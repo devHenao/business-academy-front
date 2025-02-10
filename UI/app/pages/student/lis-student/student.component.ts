@@ -4,8 +4,8 @@ import { StudentService } from '../../../services/student.service';
 import { State } from '../../../../../core/domain/Interfaces/students.response.component';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from '../../../shared/table/table.component';
-import { Studentroutes } from '../../app.student.routes';
 import { PopupService } from '../../../services/popup.service';
+import { excecuteTemplateService } from '../../../../../core/infrastructure/excecuteTemplate.service';
 
 @Component({
   selector: 'app-student',
@@ -15,6 +15,8 @@ import { PopupService } from '../../../services/popup.service';
 export default class StudentComponent {
 
   popupService_ = inject(PopupService)
+  public studentService_ = inject(StudentService);
+  public excecuteTemplateService_ = inject(excecuteTemplateService);
 
   #state = signal<State>({
     loading: true,
@@ -24,7 +26,6 @@ export default class StudentComponent {
   public student = computed( () => this.#state().student );
   public loading = computed( () => this.#state().loading );
 
-  public studentService_ = inject(StudentService);
 
   public listTHeader: any[] = [
     { key: 'firstName' , label: 'Nombre' },
@@ -47,17 +48,17 @@ export default class StudentComponent {
   }
 
   getStudents() {
-    this.studentService_.getStudents().subscribe(res => {
+    this.excecuteTemplateService_.getAllStudents().subscribe(res => {
       this.#state.set({
         loading: false,
-        student: res,
+        student: res.data,
       });
       console.log(res);
     });
   }
 
   deleteStudent(id: number) {
-    this.studentService_.deleteStudent(id).subscribe(
+    this.excecuteTemplateService_.deleteStudent(id).subscribe(
       (response: any) => {
         console.log('Estudiante eliminado correctamente', response);
         this.getStudents();

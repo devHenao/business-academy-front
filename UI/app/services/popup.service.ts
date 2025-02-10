@@ -1,13 +1,12 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef } from '@angular/core';
 import { StudentPopupComponent } from '../pages/student/student-popup/student-popup.component';
-import StudentComponent from '../pages/student/lis-student/student.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PopupService {
   private popupComponentRef: any;
-  private currentStudent: any; // <-- Almacena los datos del estudiante aquí
+  private currentStudent: any;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -16,7 +15,7 @@ export class PopupService {
   ) {}
 
   openPopup(student?: any, getData?: () => void) {
-    this.currentStudent = student; // <-- Guarda los datos del estudiante
+    this.currentStudent = student;
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(StudentPopupComponent);
     this.popupComponentRef = componentFactory.create(this.injector);
@@ -36,7 +35,7 @@ export class PopupService {
   }
 
   getCurrentStudent() {
-    return this.currentStudent; // <-- Método para obtener los datos del estudiante
+    return this.currentStudent;
   }
 
   closePopup() {

@@ -1,11 +1,6 @@
 <section class="animate__animated animate__fadeIn">
   @if(acciones && create){
   <section class="flex pb-2 justify-end items-end">
-    <!-- <button class="flex border border-black-700 text-white hover:text-stone-300
-                  items-center justify-center pl-1 pb-1 bg-gray-700" [routerLink]="[popup]">
-      Agregar <i class="fa-solid fa-plus felx pl-1 pr-2 "></i>
-    </button> -->
-    <!-- Aquí pasamos null como argumento -->
     <button (click)="openStudentPopup(null)" class="flex border border-black-700 text-white hover:text-stone-300
               items-center justify-center pl-1 pb-1 bg-gray-700">
       Agregar <i class="fa-solid fa-plus felx pl-1 pr-2 "></i>
@@ -30,7 +25,14 @@
         @for (itemBody of listTBody; track $index) {
         <tr class="border border-gray-500">
           @for (itemHeader of listTHeader; track $index) {
-          <td class="border border-gray-500 p-2">{{ itemBody[itemHeader.key] }}</td>
+          <td class="border border-gray-500 p-2 text-xs">
+            @if(itemHeader.label === 'Estado') {
+              {{ itemBody[itemHeader.key] === true ? 'Activo' : 'Inactivo' }}
+            }
+            @else {
+              {{ itemBody[itemHeader.key] }}
+            }
+          </td>
           }
           @if(acciones){
           <td class=" p-5 justify-center items-center space-x-2.5">
