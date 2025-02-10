@@ -1,5 +1,5 @@
-import { CommonModule, Location } from '@angular/common';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -11,7 +11,7 @@ import {
   errorMessages,
   regExps,
 } from '../../../../../core/global/utilities/validations.service';
-import { PopupService } from '../../../services/popup.service'; // <-- Importa el servicio
+import { PopupService } from '../../../services/popup.service';
 import { StudentService } from '../../../services/student.service';
 
 @Component({
@@ -22,6 +22,7 @@ import { StudentService } from '../../../services/student.service';
 })
 export class StudentPopupComponent {
   @Output() closePopup = new EventEmitter<void>();
+  @Input() getData!: () => void;  // Recibe la función getData
 
   close() {
     this.closePopup.emit();
@@ -41,32 +42,38 @@ export class StudentPopupComponent {
   private _popupService = inject(PopupService);
   private _studentService = inject(StudentService);
 
-  constructor(private _formBuilder: FormBuilder, private location: Location) {
+  constructor(private _formBuilder: FormBuilder) {
     const student = this._popupService.getCurrentStudent();
     console.log('Datos del estudiante en el constructor:', student);
 
     this.formLogin = this._formBuilder.group({
-      identification: ['', Validators.compose([
-                            Validators.maxLength(30),
-                            Validators.pattern(regExps['nit']),
-        ]),
-      ],
-      name: ['', Validators.compose([
-                  Validators.maxLength(30),
-                  Validators.required]),
-      ],
+      document: [Number, Validators.compose([
+                          Validators.maxLength(30),
+                          Validators.pattern(regExps['nit'])]),],
+      firstName: ['', Validators.compose([
+                Validators.maxLength(30),
+                Validators.required]),],
       lastName: ['', Validators.compose([
-        Validators.maxLength(30)])],
-      email: ['',Validators.compose([
-                  Validators.maxLength(30),
-                  Validators.required,
-                  Validators.pattern(regExps['email']),
-        ]),
-      ],
-      pageWeb: ['', Validators.compose([
-                    Validators.maxLength(50)])],
+               Validators.maxLength(30)]),],
+      // email: ['', Validators.compose([
+      //             Validators.maxLength(30),
+      //             Validators.required,
+      //             Validators.pattern(regExps['email'])
+      // ]),],
+      attendant: ['', Validators.compose([
+                    Validators.maxLength(50)]),],
       address: ['', Validators.compose([
-                    Validators.maxLength(50)])],
+                    Validators.maxLength(50)]),],
+      docType: ['', Validators.compose([
+                    Validators.maxLength(50)]),],
+      course: ['', Validators.compose([
+                    Validators.maxLength(50)]),],
+      city: ['', Validators.compose([
+                  Validators.maxLength(50)]),],
+      active: [ Validators.compose([
+                    Validators.required]),],
+      district: ['', Validators.compose([
+                    Validators.required]),],
     });
 
     if (student) {
@@ -74,29 +81,40 @@ export class StudentPopupComponent {
     }
   }
 
-  editStudent(student: any) {
-    this.accion = 'Editar Estudiante';
-    this.id = student.id;
+  editStudent( student: any) {
+    this.accion = 'Editar Estudiante'
+    this.id = student.id
 
     this.formLogin.patchValue({
-      identification: student.identification,
-      name: student.first_name,
-      lastName: student.last_name,
-      email: student.email,
-      pageWeb: student.avatar,
-      address: student.address,
-    });
+      document : student.document,
+      firstName : student.firstName,
+      lastName : student.lastName,
+      email : student.email,
+      attendant : student.attendant,
+      address : student.address,
+      district : student.district,
+      docType : student.docType,
+      course : student.course,
+      city : student.city,
+      active : student.active,
+    })
   }
 
   saveStudent() {
     const student: any = {
-      identification: this.formLogin.get('identification')?.value,
-      name: this.formLogin.get('name')?.value,
-      lastName: this.formLogin.get('lastName')?.value,
-      email: this.formLogin.get('email')?.value,
-      pageWeb: this.formLogin.get('pageWeb')?.value,
-      address: this.formLogin.get('address')?.value,
+      document : this.formLogin.get('document')?.value,
+      firstName : this.formLogin.get('firstName')?.value,
+      lastName : this.formLogin.get('lastName')?.value,
+      // email : this.formLogin.get('email')?.value,
+      attendant : this.formLogin.get('attendant')?.value,
+      address : this.formLogin.get('address')?.value,
+      district : this.formLogin.get('district')?.value,
+      docType : this.formLogin.get('docType')?.value,
+      course : this.formLogin.get('course')?.value,
+      city : this.formLogin.get('city')?.value,
+      active : this.formLogin.get('active')?.value,
     };
+
 
     if (this.id === undefined) {
       this._studentService.registerStudent(student).subscribe(
@@ -104,6 +122,9 @@ export class StudentPopupComponent {
           console.log('Estudiante guardado correctamente', response);
           this.formLogin.reset();
           this.close();
+          if (this.getData) {
+            this.getData();
+          }
         },
         (error: any) => {
           console.error('Error al guardar el estudiante', error);
@@ -111,13 +132,16 @@ export class StudentPopupComponent {
       );
     } else {
       student.id = this.id;
-      this._studentService.updateStudent(student.id, student).subscribe(
+      this._studentService.updateStudent(student).subscribe(
         () => {
           console.log('El estudiante fue actualizado correctamente');
           this.formLogin.reset();
           this.accion = 'Agregar Estudiante';
           this.id = undefined;
           this.close();
+          if (this.getData) {
+            this.getData();
+          }
         },
         (err) => {
           console.log('Hubo un error al actualizar el estudiante', err);

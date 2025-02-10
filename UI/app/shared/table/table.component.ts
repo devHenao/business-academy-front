@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-// import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-table',
@@ -18,15 +17,16 @@ export class TableComponent {
   // @Input() popup: any;
   @Input() popupServices: any;
   @Input() deleteAction?: (id:number) => void;
-
+  @Input() getData!: () => void;
 
   openStudentPopup(data: any) {
-    this.popupServices.openPopup(data);
+    this.popupServices.openPopup(data, this.getData);
   }
 
   deleteGeneric(id: number) {
     if (this.deleteAction) {
       this.deleteAction(id);
+      this.getData();
     }
   }
 }

@@ -5,72 +5,89 @@
         <i class="fas fa-times"></i>
       </button>
 
-        <app-title [title]="accion"></app-title>
+      <app-title [title]="accion"></app-title>
 
-        <form [formGroup]="formLogin" (ngSubmit)="saveStudent()">
-          <div class="space-y-12">
-            <div class="border-b border-gray-900/10 pb-12">
+      <form [formGroup]="formLogin" (ngSubmit)="saveStudent()">
+        <div class="space-y-12">
+          <div class="border-b border-gray-900/10 pb-12">
 
-              <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                <div class="sm:col-span-3">
-                  <label class="text-sm/6 font-medium text-gray-900">Nombre</label>
-                  <div class="mt-2">
-                    <input type="text" formControlName="name" placeholder="Nombre" autocomplete="given-name"
-                      class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
-                    @for( validation of errors.Requerido; track $index){
-                    <div class="ml-2 font text-sm text-red-600">
-                      @if(formLogin.get('name').hasError(validation.type) && (formLogin.get('name').dirty ||
-                      formLogin.get('name').touched)){
-                      <span>
-                        {{validation.message}}
-                      </span>
-                      }
-                    </div>
+              <div class="sm:col-span-3">
+                <label class="text-sm/6 font-medium text-gray-900">Nombre</label>
+                <div class="mt-2">
+                  <input type="text" formControlName="firstName" placeholder="Nombre" autocomplete="given-name"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('firstName').hasError(validation.type) && (formLogin.get('firstName').dirty ||
+                    formLogin.get('firstName').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
                     }
                   </div>
+                  }
                 </div>
+              </div>
 
-                <div class="sm:col-span-3">
-                  <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Apellido</label>
-                  <div class="mt-2">
-                    <input type="text" formControlName="lastName" placeholder="Apellido" name="last-name" id="last-name"
-                      autocomplete="family-name"
-                      class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
-                    @for( validation of errors.Requerido; track $index){
-                    <div class="ml-2 font text-sm text-red-600">
-                      @if(formLogin.get('lastName').hasError(validation.type) && (formLogin.get('lastName').dirty ||
-                      formLogin.get('lastName').touched)){
-                      <span
-                        *ngIf="formLogin.get('lastName').hasError(validation.type) && (formLogin.get('lastName').dirty || formLogin.get('lastName').touched)">
-                        {{validation.message}}
-                      </span>
-                      }
-                    </div>
+              <div class="sm:col-span-3">
+                <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Apellido</label>
+                <div class="mt-2">
+                  <input type="text" formControlName="lastName" placeholder="Apellido" name="last-name" id="last-name"
+                    autocomplete="family-name"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('lastName').hasError(validation.type) && (formLogin.get('lastName').dirty ||
+                    formLogin.get('lastName').touched)){
+                    <span
+                      *ngIf="formLogin.get('lastName').hasError(validation.type) && (formLogin.get('lastName').dirty || formLogin.get('lastName').touched)">
+                      {{validation.message}}
+                    </span>
                     }
                   </div>
+                  }
                 </div>
+              </div>
 
-                <div class="sm:col-span-4">
-                  <label for="first-name" class="block text-sm/6 font-medium text-gray-900">identificaión</label>
-                  <div class="mt-2">
-                    <input type="text" formControlName="identification" placeholder="Identidicación"
-                      autocomplete="given-name"
-                      class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
-                    @for( validation of errors.nit; track $index){
-                    <div class="ml-2 font text-sm text-red-600">
-                      @if(formLogin.get('identification').hasError(validation.type) &&
-                      (formLogin.get('identification').dirty
-                      || formLogin.get('identification').touched)){
-                      <span>
-                        {{validation.message}}
-                      </span>
-                      }
-                    </div>
+              <div class="sm:col-span-3">
+                <label for="email" class="block text-sm/6 font-medium text-gray-900">Tipo de documento</label>
+                <div class="mt-2">
+                  <input type="text" formControlName="docType" placeholder="Tipo de documento"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('docType').hasError(validation.type) && (formLogin.get('docType').dirty ||
+                    formLogin.get('docType').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
                     }
                   </div>
+                  }
                 </div>
+              </div>
 
+              <div class="sm:col-span-3">
+                <label for="first-name" class="block text-sm/6 font-medium text-gray-900">identificaión</label>
+                <div class="mt-2">
+                  <input type="number" formControlName="document" placeholder="Identidicación" autocomplete="given-name"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.nit; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('document').hasError(validation.type) &&
+                    (formLogin.get('document').dirty
+                    || formLogin.get('document').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+              <!--
                 <div class="sm:col-span-3">
                   <label for="email" class="block text-sm/6 font-medium text-gray-900">Dirección de correo
                     electrónico</label>
@@ -88,63 +105,132 @@
                     </div>
                     }
                   </div>
-                </div>
+                </div> -->
 
-                <div class="sm:col-span-3">
-                  <label for="email" class="block text-sm/6 font-medium text-gray-900">Dirección de vivienda</label>
-                  <div class="mt-2">
-                    <input type="email" formControlName="address" placeholder="Dirección de vivienda" autocomplete="email"
-                      class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
-                    @for( validation of errors.Requerido; track $index){
-                    <div class="ml-2 font text-sm text-red-600">
-                      @if(formLogin.get('address').hasError(validation.type) && (formLogin.get('address').dirty ||
-                      formLogin.get('address').touched)){
-                      <span>
-                        {{validation.message}}
-                      </span>
-                      }
-                    </div>
+              <div class="sm:col-span-3">
+                <label for="email" class="block text-sm/6 font-medium text-gray-900">Curso</label>
+                <div class="mt-2">
+                  <input type="text" formControlName="course" placeholder="Curso"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('course').hasError(validation.type) && (formLogin.get('course').dirty ||
+                    formLogin.get('course').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
                     }
                   </div>
+                  }
                 </div>
-
-                <div class="col-span-full">
-                  <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Pásgina WEB</label>
-                  <div class="mt-2">
-                    <input type="text" formControlName="pageWeb" placeholder="Página Web" autocomplete="street-address"
-                      class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
-                    @for( validation of errors.Requerido; track $index){
-                    <div class="ml-2 font text-sm text-red-600">
-                      @if(formLogin.get('pageWeb').hasError(validation.type) && (formLogin.get('pageWeb').dirty ||
-                      formLogin.get('pageWeb').touched)){
-                      <span>
-                        {{validation.message}}
-                      </span>
-                      }
-                    </div>
-                    }
-                  </div>
-                </div>
-
               </div>
+
+              <div class="sm:col-span-3">
+                <label for="text" class="block text-sm/6 font-medium text-gray-900">Acudeinte</label>
+                <div class="mt-2">
+                  <input type="text" formControlName="attendant" placeholder="Acudeinte"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('attendant').hasError(validation.type) && (formLogin.get('attendant').dirty ||
+                    formLogin.get('attendant').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+
+              <div class="sm:col-span-6">
+                <label for="text" class="block text-sm/6 font-medium text-gray-900">Dirección de vivienda</label>
+                <div class="mt-2">
+                  <input type="email" formControlName="address" placeholder="Dirección de vivienda"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('address').hasError(validation.type) && (formLogin.get('address').dirty ||
+                    formLogin.get('address').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+
+              <div class="sm:col-span-3">
+                <label for="text" class="block text-sm/6 font-medium text-gray-900">Ciudad</label>
+                <div class="mt-2">
+                  <input type="email" formControlName="city" placeholder="Ciudad"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('city').hasError(validation.type) && (formLogin.get('city').dirty ||
+                    formLogin.get('city').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+
+              <div class="sm:col-span-3">
+                <label for="text" class="block text-sm/6 font-medium text-gray-900">Barrio</label>
+                <div class="mt-2">
+                  <input type="email" formControlName="district" placeholder="Barrio"
+                    class="w-full rounded-md px-3 py-1.5 focus:outline-indigo-600 sm:text-sm/6">
+                  @for( validation of errors.Requerido; track $index){
+                  <div class="ml-2 font text-sm text-red-600">
+                    @if(formLogin.get('district').hasError(validation.type) && (formLogin.get('district').dirty ||
+                    formLogin.get('district').touched)){
+                    <span>
+                      {{validation.message}}
+                    </span>
+                    }
+                  </div>
+                  }
+                </div>
+              </div>
+
+              <div class="sm:col-span-3">
+                <label for="active" class="block text-sm/6 font-medium text-gray-900">Estado</label>
+                <div class="mt-2">
+                  <input type="checkbox" formControlName="active"
+                         class="rounded-md focus:outline-indigo-600 sm:text-sm/6">
+                  <label for="active" class="ml-2 text-sm text-gray-600">Activo</label>
+                  <div *ngIf="formLogin.get('active')?.invalid && (formLogin.get('active')?.dirty || formLogin.get('active')?.touched)">
+                    <div class="ml-2 text-sm text-red-600">
+                      {{ errors.Requerido?.message }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
           </div>
-          @defer (on viewport) {
-          <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm/6 font-semibold text-gray-900 hover:text-gray-500"
-              (click)="close()">Cerrar
-            </button>
-            <button type="submit"
-              class="rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white
+        </div>
+        @defer (on viewport) {
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <button type="button" class="text-sm/6 font-semibold text-gray-900 hover:text-gray-500"
+            (click)="close()">Cerrar
+          </button>
+          <button type="submit"
+            class="rounded-md bg-indigo-600 px-8 py-2 text-sm font-semibold text-white
                                    hover:bg-indigo-500  disabled:bg-gray-400 disabled:text-gray-700 disabled:cursor-not-allowed"
-              [disabled]="!formLogin.valid">
-              <i class="fas fa-database"></i> Guardar
-            </button>
-          </div>
-          }@placeholder {
-          <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">Cargando...</p>
-          }
-        </form>
+            [disabled]="!formLogin.valid">
+            <i class="fas fa-database"></i> Guardar
+          </button>
+        </div>
+        }@placeholder {
+        <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">Cargando...</p>
+        }
+      </form>
     </div>
   </div>
-  </section>
+</section>

@@ -27,28 +27,30 @@ export default class StudentComponent {
   public studentService_ = inject(StudentService);
 
   public listTHeader: any[] = [
-    { key: 'first_name' , label: 'Nombre' },
-    { key: 'last_name', label: 'Apellido' },
-    { key: 'last_name', label: 'Tipo Documento' },
-    { key: 'id' , label: 'Documento' },
-    { key: 'first_name' , label: 'Grado' },
-    { key: 'email', label: 'Correo' },
-    { key: 'first_name' , label: 'Dirección' },
-    { key: 'first_name' , label: 'Ciudad' },
-    { key: 'first_name' , label: 'Barrio' },
-    { key: 'first_name' , label: 'Acudiente' },
-    { key: 'id' , label: 'Estado' },
+    { key: 'firstName' , label: 'Nombre' },
+    { key: 'lastName', label: 'Apellido' },
+    { key: 'docType', label: 'Tipo Documento' },
+    { key: 'document' , label: 'Documento' },
+    { key: 'course' , label: 'Curso' },
+    // { key: 'email', label: 'Correo' },
+    { key: 'address' , label: 'Dirección' },
+    { key: 'city' , label: 'Ciudad' },
+    { key: 'district' , label: 'Barrio' },
+    { key: 'attendant' , label: 'Acudiente' },
+    { key: 'active' , label: 'Estado' },
   ];
 
   constructor(){
     this.getStudents();
+    console.log(this.listTHeader);
+
   }
 
   getStudents() {
     this.studentService_.getStudents().subscribe(res => {
       this.#state.set({
         loading: false,
-        student: res.data,
+        student: res,
       });
       console.log(res);
     });

@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { StudentService } from '../../../services/student.service';
 import { TitleComponent } from '../../../shared/title/title.component';
+import StudentComponent from '../lis-student/student.component';
 
 @Component({
   selector: 'app-register-student',
@@ -43,7 +44,9 @@ export default class RegisterStudentComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private location: Location
+    private location: Location,
+    private StudentComponent: StudentComponent
+
   ) {
 
     this.formLogin = this._formBuilder.group({
@@ -60,16 +63,31 @@ export default class RegisterStudentComponent {
       lastName: ['', Validators.compose([
                Validators.maxLength(30)]),
       ],
-      email: ['', Validators.compose([
-                  Validators.maxLength(30),
-                  Validators.required,
-                  Validators.pattern(regExps['email'])
-      ]),],
-      pageWeb: ['', Validators.compose([
+      // email: ['', Validators.compose([
+      //             Validators.maxLength(30),
+      //             Validators.required,
+      //             Validators.pattern(regExps['email'])
+      // ]),],
+      attendant: ['', Validators.compose([
                     Validators.maxLength(50)]),
       ],
       address: ['', Validators.compose([
                     Validators.maxLength(50)]),
+      ],
+      docType: ['', Validators.compose([
+        Validators.maxLength(50)]),
+      ],
+      course: ['', Validators.compose([
+        Validators.maxLength(50)]),
+      ],
+      city: ['', Validators.compose([
+        Validators.maxLength(50)]),
+      ],
+      active: ['', Validators.compose([
+        Validators.required]),
+      ],
+      district: ['', Validators.compose([
+        Validators.required]),
       ],
     });
 
@@ -80,12 +98,17 @@ export default class RegisterStudentComponent {
     this.id = student.id
 
     this.formLogin.patchValue({
-      identification : student.identification,
-      name : student.name,
+      identification : student.document,
+      name : student.firstName,
       lastName : student.lastName,
       email : student.email,
-      pageWeb : student.pageWeb,
+      attendant : student.attendant,
       address : student.address,
+      district : student.district,
+      docType : student.docType,
+      course : student.course,
+      city : student.city,
+      active : student.active,
     })
   }
 

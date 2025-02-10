@@ -7,7 +7,7 @@ export interface IStudentResponse {
   support:     Support;
 }
 
-export interface IStudent {
+export interface  Student{
   id:         number;
   email:      string;
   first_name: string;
@@ -21,7 +21,25 @@ export interface Support {
 }
 
 
+// export interface State {
+//   student: IStudent[]
+//   loading: boolean;
+// }
 export interface State {
-  student: IStudent[]
+  student: any[]
   loading: boolean;
+}
+
+export interface IStudent {
+  id:        number;
+  docType:   string;
+  document:  number;
+  firstName: string;
+  lastName:  string;
+  course:    string;
+  address:   string;
+  city:      string;
+  district:  string;
+  attendant: string;
+  active:    boolean;
 }
